@@ -5,6 +5,7 @@ import useBoardStore from '@/stores/useBoardStore';
 import Column from '@/features/columns/components/Column';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
+import Link from 'next/link';
 
 interface BoardProps {
   boardId: string;
@@ -63,24 +64,30 @@ const Board: React.FC<BoardProps> = ({ boardId }) => {
     <div className="h-screen flex flex-col">
       <header className="bg-white shadow p-4">
         <div className="container mx-auto flex justify-between items-center">
-          {isEditingTitle ? (
-            <div className="flex gap-2">
-              <Input
-                value={titleInput}
-                onChange={(e) => setTitleInput(e.target.value)}
-                className="max-w-xs"
-                autoFocus
-              />
-              <Button onClick={handleTitleSave}>Save</Button>
-            </div>
-          ) : (
-            <h1 
-              className="text-2xl font-bold cursor-pointer" 
-              onClick={handleTitleClick}
-            >
-              {activeBoard.title}
-            </h1>
-          )}
+          <div className="flex items-center gap-4">
+            <Link href="/" className="text-gray-600 hover:text-gray-900">
+              <Button variant="ghost">← Home</Button>
+            </Link>
+            
+            {isEditingTitle ? (
+              <div className="flex gap-2">
+                <Input
+                  value={titleInput}
+                  onChange={(e) => setTitleInput(e.target.value)}
+                  className="max-w-xs"
+                  autoFocus
+                />
+                <Button onClick={handleTitleSave}>Save</Button>
+              </div>
+            ) : (
+              <h1 
+                className="text-2xl font-bold cursor-pointer" 
+                onClick={handleTitleClick}
+              >
+                {activeBoard.title}
+              </h1>
+            )}
+          </div>
         </div>
       </header>
       
